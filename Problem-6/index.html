@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tables</title>
+    </head>
+
+    <body>
+        <h1>Tables</h1>
+        <label for="input1">Input 1 : </label>
+        <input type="text" id="input1" placeholder="rows#columns#start">
+        <label for="input2">Input 2 : </label>
+        <input type="text" id="input2" placeholder="rows#columns#start">
+
+        <button onclick="createTables()">Submit</button>
+
+        <div id="table1"></div>
+        <div id="table2"></div>
+        <div id="table3"></div>
+
+        <script>
+            function createTables() {
+                var input1 = document.getElementById("input1").value;
+                var input2 = document.getElementById("input2").value;
+
+                var num1 = input1.split("#");
+                var num2 = input2.split("#");
+
+                var row1 = parseInt(num1[0]);
+                var col1 = parseInt(num1[1]);
+                var st1 = parseInt(num1[2]);
+
+                var row2 = parseInt(num2[0]);
+                var col2 = parseInt(num2[1]);
+                var st2 = parseInt(num2[2]);
+
+                var table1 = "<h2>Table1</h2><table>"
+                var table2 = "<h2>Table2</h2><table>"
+                var table3 = "<h2>Table3</h2><table>"
+
+                if(row1 === row2 && col1 === col2)
+                {
+                    var cur1 = st1;
+                    var cur2 = st2;
+
+                    for(row=0; row<row1; row++)
+                    {
+                        table1 += "<tr>";
+                        table2 += "<tr>";
+                        table3 += "<tr>";
+                        
+                        for(col=0; col<col1; col++)
+                        {
+                            var val1 = cur1;
+                            var val2 = cur2;
+
+                            table1 += "<td>" + val1 + "</td>"
+                            table2 += "<td>" + val2 + "</td>"
+                            if(val1 === val2)
+                            {
+                                table3 += "<td>" + val1 + "</td>"
+                            } else {
+                                table3 += "<td>" + (val1*val2) + "</td>"
+                            }
+
+                            cur1 += st1;
+                            cur2 += st2;
+                        }
+                        table1 += "</tr>";
+                        table2 += "</tr>";
+                        table3 += "</tr>";
+                    }
+
+                    table1 += "</table>";
+                    table2 += "</table>";
+                    table3 += "</table>";
+
+                    document.getElementById("table1").innerHTML = table1;
+                    document.getElementById("table2").innerHTML = table2;
+                    document.getElementById("table3").innerHTML = table3;
+                } else {
+                    document.getElementById("table1").innerHTML = "";
+                    document.getElementById("table2").innerHTML = "";
+                    document.getElementById("table3").innerHTML = "";
+                }
+            }
+        </script>
+    </body>
+</html>
